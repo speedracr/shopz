@@ -5,7 +5,11 @@ Rails.application.routes.draw do
     end
   end
 
+get 'products/show'
 
+post 'products/paymentcreate'
+
+get 'admin' => 'products#admin'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
