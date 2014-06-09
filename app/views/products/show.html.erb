@@ -15,6 +15,9 @@
   <%= @product.price_in_cents %>
 </p>
 
+<img src= "<%= @product.product_image.to_s %>" />
+
+
 <%= form_tag "/products/paymentcreate/" do %>
   <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
