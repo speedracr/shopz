@@ -28,6 +28,9 @@
     data-currency="eur"
     >
   </script>
+
+  <input type="hidden" name="product_id" value="<%= @product.id %>">
+
  <% end %>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |

@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: "admin", password: "admin", only: [:new, :edit, :create, :update, :destroy]
 
   # GET /products
   # GET /products.json
@@ -72,14 +73,16 @@ class ProductsController < ApplicationController
 
 
   def paymentcreate
+    
+    @product = Product.find(params[:product_id])
     stripe_customer = Stripe::Customer.create(
       :card  => params[:stripeToken]
     )
 
     @charge = Stripe::Charge.create(
       :customer    => stripe_customer.id,
-      :amount      => 3000,
-      :description => 'My Description',
+      :amount      => @product.price_in_cents,
+      :description => @product.name,
       :currency    => 'EUR'
     )
   end
