@@ -10,6 +10,15 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    # @product = Product.find(params[:product_id])
+    # stripe_customer = Stripe::Customer.create(:card  => params[:stripeToken])
+
+    # @charge = Stripe::Charge.create(
+    #   :customer    => stripe_customer.id,
+    #   :amount      => @product.price_in_cents,
+    #   :description => @product.name,
+    #   :currency    => 'EUR'
+    # )
   end
 
   # GET /products/new
@@ -59,6 +68,20 @@ class ProductsController < ApplicationController
       format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+
+  def paymentcreate
+    stripe_customer = Stripe::Customer.create(
+      :card  => params[:stripeToken]
+    )
+
+    @charge = Stripe::Charge.create(
+      :customer    => stripe_customer.id,
+      :amount      => 3000,
+      :description => 'My Description',
+      :currency    => 'EUR'
+    )
   end
 
   private

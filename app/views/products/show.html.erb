@@ -15,5 +15,17 @@
   <%= @product.price_in_cents %>
 </p>
 
+<%= form_tag "/products/paymentcreate/" do %>
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="Stripetastic hats"
+    data-description="<%= @product.name %>"
+    data-amount="<%= @product.price_in_cents %>"
+    data-currency="eur"
+    >
+  </script>
+ <% end %>
+
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
