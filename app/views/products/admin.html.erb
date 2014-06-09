@@ -1,4 +1,4 @@
-<h1>Listing products</h1>
+<h1>Admin Page</h1>
 
 <table>
   <thead>
@@ -17,6 +17,8 @@
         <td><%= product.description %></td>
         <td><%= product.price_in_cents %></td>
         <td><%= link_to 'Show', product %></td>
+        <td><%= link_to 'Edit', edit_product_path(product) %></td>
+        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -24,5 +26,4 @@
 
 <br>
 
-
-<%= link_to 'Admin', admin_path %>
+<%= link_to 'New Product', new_product_path %>
