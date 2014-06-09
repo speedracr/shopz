@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     end
   end
 
-get 'products/show'
+# get 'products/show'
 
 post 'products/paymentcreate'
 

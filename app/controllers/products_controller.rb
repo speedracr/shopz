@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
 
 
   def paymentcreate
-
+    @product = Product.find(params[:product_id])
     stripe_customer = Stripe::Customer.create(
       :card  => params[:stripeToken]
     )
