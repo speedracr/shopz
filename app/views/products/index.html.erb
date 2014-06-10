@@ -11,6 +11,7 @@
   </thead>
 
   <tbody>
+    <%= @warning %>
     <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
@@ -23,3 +24,5 @@
 </table>
 
 <br>
+
+<%= render 'searchform' %>
