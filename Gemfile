@@ -16,6 +16,7 @@ gem 'bootstrap-sass'
 
 gem 'stripe'
 
+gem 'rmagick', :require => 'RMagick'
 
 group :development do 
 	gem 'sqlite3'	

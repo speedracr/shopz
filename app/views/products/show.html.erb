@@ -15,8 +15,9 @@
   <%= @product.price_in_cents %>
 </p>
 
-<img src= "<%= @product.product_image.to_s %>" />
 
+
+<a class='test-popup-link' href= "<%= @product.product_image.to_s %>"> <%= image_tag @product.product_image_url(:thumb).to_s  %> </a>
 
 <%= form_tag "/products/paymentcreate/" do %>
   <script
@@ -32,6 +33,19 @@
   <input type="hidden" name="product_id" value="<%= @product.id %>">
 
  <% end %>
+
+ <script>
+ $(document).ready(function() {
+  $('.image-link').magnificPopup({type:'image'});
+  });
+</script>
+<script>
+ $('.test-popup-link').magnificPopup({ 
+  type: 'image'
+  // other options
+});
+
+</script>
 
 
 <%= link_to 'Back', products_path %>
