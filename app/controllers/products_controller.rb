@@ -5,7 +5,18 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+      if params[:search]
+        @searchresult = Product.search(params[:search]).all
+        # raise @searchresult.inspect
+        if @searchresult == []
+          @products = Product.all
+          @warning = "Your search didn't return any results"
+        else
+          @products = @searchresult
+        end
+      else
+        @products = Product.all
+      end
   end
 
   # GET /products/1
