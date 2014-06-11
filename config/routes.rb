@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+<<<<<<< HEAD
+=======
+  resources :line_items
+
+  resources :carts
+
+>>>>>>> ShoppingCart
   resources :products do
     collection do
       post :paymentcreate

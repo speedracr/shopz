@@ -3,7 +3,11 @@
 class ProductImageUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
+<<<<<<< HEAD
   include CarrierWave::MiniMagick
+=======
+  include CarrierWave::RMagick
+>>>>>>> ShoppingCart
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
