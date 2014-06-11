@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :shopping_carts
+
   resources :products do
     collection do
       post :paymentcreate

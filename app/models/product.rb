@@ -5,4 +5,5 @@ class Product < ActiveRecord::Base
     # where(:title, query) -> This would return an exact match of the query
     where("name like ?", "%#{query}%") 
 	end
+	has_many :line_items
 end
