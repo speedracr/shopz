@@ -16,15 +16,20 @@ gem 'bootstrap-sass'
 
 gem 'stripe'
 
-gem 'rmagick', :require => 'RMagick'
+# Manage AWS storage
+gem "fog", "~> 1.3.1"
+
+# Replacement for rmagick
+gem 'rmagick', :require => 'RMagick', platforms: [:ruby]
+gem "mini_magick"
 
 group :development do 
-	gem 'sqlite3'	
+  gem 'sqlite3' 
 end
 
 group :production do
-	gem 'pg'
-	gem 'rails_12factor'
+  gem 'pg'
+  gem 'rails_12factor'
 end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
