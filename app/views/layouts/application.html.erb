@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Shopz</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+
+ 
+    
+
+</head>
+<body>
+
+<%= render '/layouts/header' %>
+
+<section class="container">
+  <%= yield %>
+</section>
+
+
+<%= render '/layouts/footer' %>
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script> 
+  <script src="./jquery.magnific-popup.js"></script> 
+
+
+</body>
+</html>

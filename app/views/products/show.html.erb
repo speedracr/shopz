@@ -1,0 +1,52 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Price in cents:</strong>
+  <%= @product.price_in_cents %>
+</p>
+
+<%= button_to 'Add to Cart', line_items_path(product_id: @product)%>
+
+
+<a class='test-popup-link' href= "<%= @product.product_image.to_s %>"> <%= image_tag @product.product_image_url(:thumb).to_s  %> </a>
+
+<%= form_tag "/products/paymentcreate/" do %>
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="Stripetastic hats"
+    data-description="<%= @product.name %>"
+    data-amount="<%= @product.price_in_cents %>"
+    data-currency="eur"
+    >
+  </script>
+
+  <input type="hidden" name="product_id" value="<%= @product.id %>">
+
+ <% end %>
+
+ <script>
+ $(document).ready(function() {
+  $('.image-link').magnificPopup({type:'image'});
+  });
+</script>
+<script>
+ $('.test-popup-link').magnificPopup({ 
+  type: 'image'
+  // other options
+});
+
+</script>
+
+
+<%= link_to 'Back', products_path %>
