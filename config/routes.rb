@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
   resources :line_items
 
-  resources :carts
+  resources :carts do 
+    collection do 
+      get :add_item_to_cart
+    end
+  end
 
   resources :products do
     collection do
