@@ -1,106 +1,106 @@
-class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+# class CartsController < ApplicationController
+#   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
-  ## add current_cart later on:
-  before_action :set_current_cart
+#   ## add current_cart later on:
+#   before_action :set_current_cart
 
-  def add_item_to_cart
-    # cart = Cart.first
-    product_id  = params[:product_id]
+#   def add_item_to_cart
+#     # cart = Cart.first
+#     product_id  = params[:product_id]
 
-    LineItem.create(product_id: product_id, cart_id: @current_card.id)
-  end
+#     LineItem.create(product_id: product_id, cart_id: @current_card.id)
+#   end
 
-  # also add this to routes. contents needs to go into cart_model as current_cart.map
-  def show_current_cart 
-    render text: @current_cart.contents
-  end
-
-
+#   # also add this to routes. contents needs to go into cart_model as current_cart.map
+#   def show_current_cart 
+#     render text: @current_cart.contents
+#   end
 
 
 
 
 
-  ###################################
-
-  # GET /carts
-  # GET /carts.json
-  def index
-    @carts = Cart.all
-  end
-
-  # GET /carts/1
-  # GET /carts/1.json
-  def show
-  end
-
-  # GET /carts/new
-  def new
-    @cart = Cart.new
-  end
-
-  # GET /carts/1/edit
-  def edit
-  end
-
-  # POST /carts
-  # POST /carts.json
-  def create
-    @cart = Cart.new(cart_params)
-
-    respond_to do |format|
-      if @cart.save
-        format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
-        format.json { render :show, status: :created, location: @cart }
-      else
-        format.html { render :new }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /carts/1
-  # PATCH/PUT /carts/1.json
-  def update
-    respond_to do |format|
-      if @cart.update(cart_params)
-        format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
-        format.json { render :show, status: :ok, location: @cart }
-      else
-        format.html { render :edit }
-        format.json { render json: @cart.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /carts/1
-  # DELETE /carts/1.json
-  def destroy
-    @cart.destroy
-    respond_to do |format|
-      format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_cart
-      @cart = Cart.find(params[:id])
-    end
 
 
-    ## set the current cart >> This goes into the concern eventually
-    def set_current_cart
-      @current_cart = Cart.find(session[:cart_id])
-    rescue ActiveRecord::RecordNotFound
-      @current_cart = Cart.create
-      session[:cart_id] = @current_cart.id
-    end
+#   ###################################
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def cart_params
-      params[:cart]
-    end
-end
+#   # GET /carts
+#   # GET /carts.json
+#   def index
+#     @carts = Cart.all
+#   end
+
+#   # GET /carts/1
+#   # GET /carts/1.json
+#   def show
+#   end
+
+#   # GET /carts/new
+#   def new
+#     @cart = Cart.new
+#   end
+
+#   # GET /carts/1/edit
+#   def edit
+#   end
+
+#   # POST /carts
+#   # POST /carts.json
+#   def create
+#     @cart = Cart.new(cart_params)
+
+#     respond_to do |format|
+#       if @cart.save
+#         format.html { redirect_to @cart, notice: 'Cart was successfully created.' }
+#         format.json { render :show, status: :created, location: @cart }
+#       else
+#         format.html { render :new }
+#         format.json { render json: @cart.errors, status: :unprocessable_entity }
+#       end
+#     end
+#   end
+
+#   # PATCH/PUT /carts/1
+#   # PATCH/PUT /carts/1.json
+#   def update
+#     respond_to do |format|
+#       if @cart.update(cart_params)
+#         format.html { redirect_to @cart, notice: 'Cart was successfully updated.' }
+#         format.json { render :show, status: :ok, location: @cart }
+#       else
+#         format.html { render :edit }
+#         format.json { render json: @cart.errors, status: :unprocessable_entity }
+#       end
+#     end
+#   end
+
+#   # DELETE /carts/1
+#   # DELETE /carts/1.json
+#   def destroy
+#     @cart.destroy
+#     respond_to do |format|
+#       format.html { redirect_to carts_url, notice: 'Cart was successfully destroyed.' }
+#       format.json { head :no_content }
+#     end
+#   end
+
+#   private
+#     # Use callbacks to share common setup or constraints between actions.
+#     def set_cart
+#       @cart = Cart.find(params[:id])
+#     end
+
+
+#     ## set the current cart >> This goes into the concern eventually
+#     def set_current_cart
+#       @current_cart = Cart.find(session[:cart_id])
+#     rescue ActiveRecord::RecordNotFound
+#       @current_cart = Cart.create
+#       session[:cart_id] = @current_cart.id
+#     end
+
+#     # Never trust parameters from the scary internet, only allow the white list through.
+#     def cart_params
+#       params[:cart]
+#     end
+# end
