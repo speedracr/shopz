@@ -6,11 +6,11 @@ class CartsController < ApplicationController
 
     LineItem.create(product_id: product_id, cart_id: @current_cart.id)
 
-    render text: @current_cart.contents
+    render text: @current_cart.contents, layout: true
   end
 
   def show_current_cart
-    render text: @current_cart.contents
+    render text: @current_cart.contents, layout: true
   end
 
 
