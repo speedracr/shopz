@@ -1,5 +1,21 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_current_cart
+
+  def add_item_to_cart
+    product_id = params[:product_id]
+
+    LineItem.create(product_id: product_id, cart_id: @current_cart.id)
+
+    render text: @current_cart.contents
+  end
+
+  def show_current_cart
+    render text: @current_cart.contents
+  end
+
+
+
 
   # GET /carts
   # GET /carts.json
@@ -66,6 +82,14 @@ class CartsController < ApplicationController
     def set_cart
       @cart = Cart.find(params[:id])
     end
+
+    def set_current_cart
+      @current_cart = Cart.find(session[:cart_id])
+    rescue ActiveRecord::RecordNotFound
+      @current_cart = Cart.create
+      session[:cart_id] = @current_cart.id
+    end
+
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params
