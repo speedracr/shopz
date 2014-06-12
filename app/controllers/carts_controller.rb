@@ -1,8 +1,29 @@
 class CartsController < ApplicationController
-  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  # before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
+
+  def add_item_to_cart
+    product_id = params[:product_id]
+    @item =  LineItem.create(product_id: product_id, cart_id: @current_cart.id)
+    redirect_to @current_cart, notice: 'The Item was added to your cart'
+  end
+
+  def pay_for_cart
+    stripe_customer = Stripe::Customer.create(
+      :card  => params[:stripeToken]
+    )
+
+    @charge = Stripe::Charge.create(
+      :customer    => stripe_customer.id,
+      :amount      => @current_cart.get_total,
+      :description => "A bunch of Stuff",
+      :currency    => 'EUR'
+    )
+  end
+
+
   def index
     @carts = Cart.all
   end
@@ -63,9 +84,9 @@ class CartsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_cart
-      @cart = Cart.find(params[:id])
-    end
+    # def set_cart
+    #   @cart = Cart.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params

@@ -3,10 +3,27 @@
 <h2> Your Cart</h2>
 
 <ul>
-<% @cart.line_items.each do |item| %>
-	<li><%= item.product.name %></li>
+<% @current_cart.line_items.each do |item| %>
+	<li> Name: <%= item.product.name %> <br>Price: <%= item.product.price_in_cents / 100 %></li>
 <% end %>
 </ul>
 
-<%= link_to 'Edit', edit_cart_path(@cart) %> |
-<%= link_to 'Back', carts_path %>
+<!-- #trying to push# -->
+
+Your Total Checkout Price:
+
+<%= @current_cart.get_total %>
+
+<%= form_tag "/carts/pay_for_cart/" do %>
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+    data-name="Stripetastic hats"
+    data-description=" A bunch of Stuff "
+    data-amount="<%= @current_cart.get_total %>"
+    data-currency="eur"
+    >
+  </script>
+<% end %>
+
+<br>

@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
   resources :line_items
 
-  resources :carts
+  resources :carts do
+    collection do
+      get :add_item_to_cart
+      post :pay_for_cart
 
+    end
+  end
   resources :products do
     collection do
       post :paymentcreate
