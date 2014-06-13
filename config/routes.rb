@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     collection do
       get :add_item_to_cart
       post :pay_for_cart
+      get :checkout
     end
   end
   

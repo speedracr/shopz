@@ -1,5 +1,6 @@
 class CartsController < ApplicationController
-  # before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  before_action :set_cart, only: [:show, :edit, :update, :destroy]
+  http_basic_authenticate_with name: "admin", password: "admin", only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
@@ -7,7 +8,7 @@ class CartsController < ApplicationController
   def add_item_to_cart
     product_id = params[:product_id]
     @item =  LineItem.create(product_id: product_id, cart_id: @current_cart.id)
-    redirect_to @current_cart, notice: 'The Item was added to your cart'
+    redirect_to checkout_carts_path, notice: 'The Item was added to your cart'
   end
 
   def pay_for_cart
@@ -21,6 +22,20 @@ class CartsController < ApplicationController
       :description => "A bunch of Stuff",
       :currency    => 'EUR'
     )
+
+    ActionMailer::Base.mail(:from => 'from@domain.com', :to => 'to@domain.com', :subject => "Order Registered", :body => "Thanks for purchasing, #{@current_cart.get_total} will be charged to your credit card.").deliver
+    ActionMailer::Base.mail(:from => 'from@domain.com', :to => params[:stripeEmail], :subject => "Order Registered", :body => "Thanks for purchasing, #{@current_cart.get_total} will be charged to your credit card.").deliver
+
+
+
+    @current_cart.email = params[:stripeEmail]
+    @current_cart.status = "paid"
+    @current_cart.save!
+
+    reset_cart
+
+    redirect_to checkout_carts_path, notice: 'Thanks for the $$, redirecting to empty cart'
+
   end
 
 
@@ -82,11 +97,14 @@ class CartsController < ApplicationController
     end
   end
 
+  def checkout
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
-    # def set_cart
-    #   @cart = Cart.find(params[:id])
-    # end
+    def set_cart
+      @cart = Cart.find(params[:id])
+    end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def cart_params

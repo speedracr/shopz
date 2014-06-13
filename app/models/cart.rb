@@ -12,7 +12,7 @@ class Cart < ActiveRecord::Base
 	end
 
 	def total_in_dollars
-		total / 100
+		@total / 100
 	end
 
 end

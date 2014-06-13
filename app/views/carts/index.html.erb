@@ -10,7 +10,8 @@
   <tbody>
     <% @carts.each do |cart| %>
       <tr>
-        <td><%= number_to_currency(cart.total_in_dollars) %></td>
+        <td><%= cart.get_total %></td>
+        <td><%= cart.status %></td>
         <td><%= link_to 'Show', cart %></td>
         <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
         <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
