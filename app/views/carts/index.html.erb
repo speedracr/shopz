@@ -1,17 +1,24 @@
 <h1>Listing carts</h1>
-
-<table>
+<div class="row">
+<div class="col-md-7">
+<table class="table table-striped">
   <thead>
     <tr>
-      <th colspan="4"></th>
+      
+      <th class="col-md-2">Cart Status</th>
+      <th class="col-md-2">Total Purchase</th>
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
+      <th class="col-md-1"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @carts.each do |cart| %>
       <tr>
-        <td><%= cart.get_total %></td>
+        
         <td><%= cart.status %></td>
+        <td><%= cart.get_total %></td>
         <td><%= link_to 'Show', cart %></td>
         <td><%= link_to 'Edit', edit_cart_path(cart) %></td>
         <td><%= link_to 'Destroy', cart, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -19,7 +26,7 @@
     <% end %>
   </tbody>
 </table>
-
+</div>
+</div>
 <br>
-
 <%= link_to 'New Cart', new_cart_path %>

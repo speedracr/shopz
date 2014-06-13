@@ -1,30 +1,31 @@
 <p id="notice"><%= notice %></p>
+<div class="row">
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+<div class="col-md-2">
+  <p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+      <strong>Name:</strong>
+    <%= @product.name %>
+    
+  </p>
 
-<p>
-  <strong>Price in cents:</strong>
-  <%= @product.price_in_cents %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @product.description %>
+  </p>
 
-<%= button_to 'Add to Cart', line_items_path(product_id: @product)%>
+  <p>
+    <strong>Price in cents:</strong>
+    <%= @product.price_in_cents %>
+  </p>
+</div>
 
 
-<%= link_to 'Add to Cart2', add_item_to_cart_carts_path(product_id: @product.id) %>
+<div class="col-md-2">
+  <%= button_to 'Add to Cart', add_item_to_cart_carts_path(product_id: @product.id) %>
 
-
-<a class='test-popup-link' href= "<%= @product.product_image.to_s %>"> <%= image_tag @product.product_image_url(:thumb).to_s  %> </a>
-
-<%= form_tag "/products/paymentcreate/" do %>
-  <script
+  <%= form_tag "/products/paymentcreate/", class:"paybutton" do %>
+    <script
     src="https://checkout.stripe.com/checkout.js" class="stripe-button"
     data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
     data-name="Stripetastic hats"
@@ -38,6 +39,11 @@
 
  <% end %>
 
+
+<a class='test-popup-link' href= "<%= @product.product_image.to_s %>"> <%= image_tag @product.product_image_url(:thumb).to_s  %> </a>
+
+
+
  <script>
  $(document).ready(function() {
   $('.image-link').magnificPopup({type:'image'});
@@ -50,6 +56,7 @@
 });
 
 </script>
-
+</div>
+</div>
 
 <%= link_to 'Back', products_path %>
