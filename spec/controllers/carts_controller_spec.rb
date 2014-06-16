@@ -34,4 +34,6 @@ describe CartsController do
     expect(assigns(:current_cart).line_items.first.product).to  eq(product)
   end
 
+
+  
 end
