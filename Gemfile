@@ -44,3 +44,13 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'carrierwave'
+
+
+group :test do
+  gem 'rspec-rails'
+  gem 'syntax'
+  gem 'factory_girl_rails'
+  gem 'email_spec', require: false
+  gem "webrat"
+  gem 'capybara'
+end
