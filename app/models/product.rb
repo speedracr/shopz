@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
 	has_many :line_items
+	validates_presence_of :name, :price_in_cents
 
 	before_destroy :ensure_not_referenced_by_any_line_item
 
