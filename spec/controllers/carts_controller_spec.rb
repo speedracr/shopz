@@ -19,9 +19,6 @@ describe CartsController do
     expect(response).not_to render_template("index")
   end
 
-
-  it "should authenticate on index"
-
   it "adding items to cart redirects to index" do
     expect(LineItem).to receive(:create!)
 
