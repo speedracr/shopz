@@ -1,13 +1,13 @@
 class CartsController < ApplicationController
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
-  http_basic_authenticate_with name: "admin", password: "admin", only: [:index, :new, :edit, :create, :update, :destroy]
+  # http_basic_authenticate_with name: "admin", password: "admin", only: [:index, :new, :edit, :create, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
 
   def add_item_to_cart
     product_id = params[:product_id]
-    @item =  LineItem.create(product_id: product_id, cart_id: @current_cart.id)
+    @item =  LineItem.create!(product_id: product_id, cart_id: @current_cart.id)
     redirect_to checkout_carts_path, notice: 'The Item was added to your cart'
   end
 
