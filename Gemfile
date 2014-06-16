@@ -44,7 +44,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin]
 
 gem 'carrierwave'
-
+gem 'byebug'
 
 group :test do
   gem 'rspec-rails'

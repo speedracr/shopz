@@ -7,7 +7,7 @@ class CartsController < ApplicationController
 
   def add_item_to_cart
     product_id = params[:product_id]
-    @item =  LineItem.create(product_id: product_id, cart_id: @current_cart.id)
+    @item =  LineItem.create!(product_id: product_id, cart_id: @current_cart.id)
     redirect_to checkout_carts_path, notice: 'The Item was added to your cart'
   end
 
