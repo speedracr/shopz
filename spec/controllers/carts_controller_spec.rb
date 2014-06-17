@@ -53,7 +53,7 @@ describe CartsController do
 
   get :index
 
-  expect(assigns(:current_cart)).to  eq(cart)
+  expect(assigns(:current_cart)).not_to  eq(cart)
 end
 
 
