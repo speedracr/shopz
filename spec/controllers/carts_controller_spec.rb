@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe CartsController do
+
   def http_login
     user = 'admin'
     pw = 'admin'
@@ -51,11 +52,8 @@ describe CartsController do
   cart.add_item(product3)
 
   get :index
-  render_template("index")
 
-  expect("/index").to have_content("Your cart has 3 items")
-
-
+  expect(assigns(:current_cart)).to  eq(cart)
 end
 
 
